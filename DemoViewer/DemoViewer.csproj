@@ -1,0 +1,253 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="FireCircle.xaml" />
+    <None Remove="KillFeedEntry.xaml" />
+    <None Remove="killicons\ak47.png" />
+    <None Remove="killicons\aug.png" />
+    <None Remove="killicons\awp.png" />
+    <None Remove="killicons\bizon.png" />
+    <None Remove="killicons\bombplant.png" />
+    <None Remove="killicons\cz75.png" />
+    <None Remove="killicons\deagle.png" />
+    <None Remove="killicons\decoy.png" />
+    <None Remove="killicons\defusekit.png" />
+    <None Remove="killicons\dualies.png" />
+    <None Remove="killicons\famas.png" />
+    <None Remove="killicons\fiveseven.png" />
+    <None Remove="killicons\flashbang.png" />
+    <None Remove="killicons\g3sg1.png" />
+    <None Remove="killicons\galilar.png" />
+    <None Remove="killicons\glock.png" />
+    <None Remove="killicons\grenade.png" />
+    <None Remove="killicons\headshot.png" />
+    <None Remove="killicons\hegrenade.png" />
+    <None Remove="killicons\incgrenade.png" />
+    <None Remove="killicons\inferno.png" />
+    <None Remove="killicons\kevlar.png" />
+    <None Remove="killicons\kevlar_helmet.png" />
+    <None Remove="killicons\knife_bayonet.png" />
+    <None Remove="killicons\knife_default_ct.png" />
+    <None Remove="killicons\knife_default_t.png" />
+    <None Remove="killicons\knife_flip.png" />
+    <None Remove="killicons\knife_gut.png" />
+    <None Remove="killicons\knife_karambit.png" />
+    <None Remove="killicons\knife_m9_bayonet.png" />
+    <None Remove="killicons\m249.png" />
+    <None Remove="killicons\m4a1.png" />
+    <None Remove="killicons\m4a1_silencer.png" />
+    <None Remove="killicons\mac10.png" />
+    <None Remove="killicons\mag7.png" />
+    <None Remove="killicons\molotov.png" />
+    <None Remove="killicons\mp7.png" />
+    <None Remove="killicons\mp9.png" />
+    <None Remove="killicons\negev.png" />
+    <None Remove="killicons\nova.png" />
+    <None Remove="killicons\p2000.png" />
+    <None Remove="killicons\p250.png" />
+    <None Remove="killicons\p90.png" />
+    <None Remove="killicons\penetrate.png" />
+    <None Remove="killicons\sawedoff.png" />
+    <None Remove="killicons\scar20.png" />
+    <None Remove="killicons\sg552.png" />
+    <None Remove="killicons\sg556.png" />
+    <None Remove="killicons\smokegrenade.png" />
+    <None Remove="killicons\ssg08.png" />
+    <None Remove="killicons\suicide.png" />
+    <None Remove="killicons\taser.png" />
+    <None Remove="killicons\tec9.png" />
+    <None Remove="killicons\ump45.png" />
+    <None Remove="killicons\usp_silencer.png" />
+    <None Remove="killicons\usp_silencer_off.png" />
+    <None Remove="killicons\xm1014.png" />
+    <None Remove="PlayerDot.xaml" />
+    <None Remove="PlayerHudEntryCT - Copy.xaml" />
+    <None Remove="PlayerHudEntryCT.xaml" />
+    <None Remove="PlayerHudEntryT.xaml" />
+    <None Remove="Radar.xaml" />
+    <None Remove="SmokeCircle.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DemoMinifier\DemoMinifier.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="killicons\ak47.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\aug.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\awp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\bizon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\bombplant.png" />
+    <Resource Include="killicons\cz75.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\deagle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\decoy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\defusekit.png" />
+    <Resource Include="killicons\dualies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\famas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\fiveseven.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\flashbang.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\g3sg1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\galilar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\glock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\grenade.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\headshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\hegrenade.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\incgrenade.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\inferno.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\kevlar.png" />
+    <Resource Include="killicons\kevlar_helmet.png" />
+    <Resource Include="killicons\knife_bayonet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\knife_default_ct.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\knife_default_t.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\knife_flip.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\knife_gut.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\knife_karambit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\knife_m9_bayonet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\m249.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\m4a1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\m4a1_silencer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\mac10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\mag7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\molotov.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\mp7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\mp9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\negev.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\nova.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\p2000.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\p250.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\p90.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\penetrate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\sawedoff.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\scar20.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\sg552.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\sg556.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\smokegrenade.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\ssg08.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\suicide.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\taser.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\tec9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\ump45.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\usp_silencer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\usp_silencer_off.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="killicons\xm1014.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="PlayerHudEntryCT - Copy.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

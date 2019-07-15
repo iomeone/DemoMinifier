@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="K4os.Compression.LZ4" Version="1.1.10" />
+    <PackageReference Include="K4os.Compression.LZ4.Streams" Version="1.1.10" />
+    <PackageReference Include="protobuf-net" Version="3.0.0-alpha.32" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DemoInfo\DemoInfo.csproj" />
+  </ItemGroup>
+
+</Project>
