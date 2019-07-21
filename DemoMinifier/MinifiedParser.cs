@@ -311,6 +311,7 @@ namespace DemoMinifier
                     p.HasDefuseKit = fullUpdate.HasDefuseKit;
                     p.HasHelmet = fullUpdate.HasHelmet;
                     p.RawWeapons = fullUpdate.Weapons;
+                    p.IsScoped = fullUpdate.IsScoped;
                     //p.AmmoLeft = fullUpdate.AmmoLeft;
                 }
             }

@@ -181,7 +181,8 @@ namespace DemoMinifier
                     HasDefuseKit = player.HasDefuseKit,
                     HasHelmet = player.HasHelmet,
                     AmmoLeft = AmmoLeft,
-                    Weapons = Weapons
+                    Weapons = Weapons,
+                    IsScoped = player.IsScoped
                 };
 
                 PositionPlayerState positionPlayerState = new PositionPlayerState(fullPlayerState);

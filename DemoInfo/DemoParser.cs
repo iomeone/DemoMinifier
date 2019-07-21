@@ -920,6 +920,8 @@ namespace DemoInfo
             playerEntity.FindProperty("localdata.m_vecViewOffset[1]").FloatRecived += (sender, e) => p.ViewOffset.Y = e.Value;
             playerEntity.FindProperty("localdata.m_vecViewOffset[2]").FloatRecived += (sender, e) => p.ViewOffset.Z = e.Value;
 
+            playerEntity.FindProperty("m_bIsScoped").IntRecived += (sender, e) => p.IsScoped = e.Value == 1;
+
 
             playerEntity.FindProperty("m_unCurrentEquipmentValue").IntRecived += (sender, e) => p.CurrentEquipmentValue = e.Value;
 			playerEntity.FindProperty("m_unRoundStartEquipmentValue").IntRecived += (sender, e) => p.RoundStartEquipmentValue = e.Value;

@@ -37,6 +37,8 @@ namespace DemoMinifier.Models
         public Dictionary<byte, byte> AmmoLeft { get; set; }
         [ProtoMember(22)]
         public Dictionary<short, Weapon> Weapons { get; set; }
+        [ProtoMember(23)]
+        public bool IsScoped { get; set; }
 
         public FullPlayerState()
         {
@@ -90,6 +92,9 @@ namespace DemoMinifier.Models
                 return false;
 
             if (AmmoLeft.Count != other.AmmoLeft.Count)
+                return false;
+
+            if (IsScoped != other.IsScoped)
                 return false;
 
 

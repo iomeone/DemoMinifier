@@ -18,6 +18,8 @@ namespace DemoInfo
         //Custom
         public Vector ViewOffset { get; set; }
 
+        public bool IsScoped { get; set; }
+
         public int EntityID { get; set; }
 
 		public int HP { get; set; }
