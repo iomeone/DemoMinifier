@@ -111,6 +111,37 @@ namespace DemoMinifier
 
         private void HandleTickDone(object sender, TickDoneEventArgs e)
         {
+            //Store the names and steam IDs for every steam account in the server, including casters, bots and referees
+            foreach (var participant in Parser.Participants)
+            {
+                byte NameIndex = 0;
+                if (Demo.NameMappings.ContainsValue(participant.Name))
+                {
+                    NameIndex = Demo.NameMappings.FirstOrDefault(x => x.Value == participant.Name).Key;
+                }
+                else
+                {
+                    NameIndex = CurrentNameIndex;
+                    Demo.NameMappings.Add(NameIndex, participant.Name);
+
+                    CurrentNameIndex++;
+                }
+
+                byte SteamIDIndex = 0;
+                if (Demo.SteamIDMappings.ContainsValue(participant.SteamID))
+                {
+                    SteamIDIndex = Demo.SteamIDMappings.FirstOrDefault(x => x.Value == participant.SteamID).Key;
+                }
+                else
+                {
+                    SteamIDIndex = CurrentSteamIDIndex;
+                    Demo.SteamIDMappings.Add(SteamIDIndex, participant.SteamID);
+
+                    CurrentSteamIDIndex++;
+                }
+            }
+
+            //Loop though players that are actually playing the match
             foreach (var player in Parser.PlayingParticipants)
             {
                 byte NameIndex = 0;

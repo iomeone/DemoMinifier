@@ -216,7 +216,7 @@ namespace DemoMinifier
 		/// Occurs when the server display a player rank
 		/// </summary>
 		public event EventHandler<RankUpdateEvent> RankUpdate;
-		#endregion
+        #endregion
 
         public string Map
         {
