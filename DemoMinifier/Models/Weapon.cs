@@ -24,6 +24,8 @@ namespace DemoMinifier.Models
         public short AmmoInMagazine { get; set; }
         [ProtoMember(4)]
         public short AmmoType { get; set; }
+        [ProtoMember(5)]
+        public byte ZoomLevel { get; set; } = 0;
 
         public override bool Equals(object obj)
         {
@@ -42,6 +44,9 @@ namespace DemoMinifier.Models
                 return false;
 
             if (AmmoType != other.AmmoType)
+                return false;
+
+            if (ZoomLevel != other.ZoomLevel)
                 return false;
 
             return true;

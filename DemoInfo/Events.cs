@@ -376,7 +376,9 @@ namespace DemoInfo
 
 		public int AmmoType { get; set; }
 
-		public Player Owner { get; set; }
+        public int ZoomLevel { get; set; } = 0;
+
+        public Player Owner { get; set; }
 
 		public int ReserveAmmo
 		{

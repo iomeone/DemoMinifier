@@ -1039,6 +1039,15 @@ namespace DemoInfo
 				equipment.AmmoInMagazine = ammoUpdate.Value - 1; //wtf volvo y -1?
 			};
 
+            //Custom
+            if (e.Class.BaseClasses.Any(baseClass => baseClass.Name == "CWeaponCSBaseGun"))
+            {
+                e.Entity.FindProperty("m_zoomLevel").IntRecived += (sender, zoomUpdate) =>
+                {
+                    equipment.ZoomLevel = zoomUpdate.Value;
+                };
+            }
+            
 			e.Entity.FindProperty("LocalWeaponData.m_iPrimaryAmmoType").IntRecived += (asdasd, typeUpdate) => {
 				equipment.AmmoType = typeUpdate.Value;
 			};

@@ -155,6 +155,7 @@ namespace DemoMinifier
                         OriginalString = pair.Value.OriginalString,
                         AmmoInMagazine = (short)pair.Value.AmmoInMagazine,
                         AmmoType = (short)pair.Value.AmmoType,
+                        ZoomLevel = (byte)pair.Value.ZoomLevel
                     });
                 }
 
