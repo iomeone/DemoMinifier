@@ -314,7 +314,15 @@ namespace DemoMinifier
                     p.IsScoped = fullUpdate.IsScoped;
                     p.ShotsFired = fullUpdate.ShotsFired;
                     p.AimPunchAngle = fullUpdate.AimPunchAngle;
-                    //p.AmmoLeft = fullUpdate.AmmoLeft;
+
+                    p.AmmoLeft = new int[32];
+                    for (int i = 0; i < 32; i++)
+                    {
+                        if (fullUpdate.AmmoLeft.ContainsKey((byte)i))
+                            p.AmmoLeft[i] = fullUpdate.AmmoLeft[(byte)i];
+                        else
+                            p.AmmoLeft[i] = 0;
+                    }
                 }
             }
         }
