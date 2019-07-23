@@ -312,6 +312,8 @@ namespace DemoMinifier
                     p.HasHelmet = fullUpdate.HasHelmet;
                     p.RawWeapons = fullUpdate.Weapons;
                     p.IsScoped = fullUpdate.IsScoped;
+                    p.ShotsFired = fullUpdate.ShotsFired;
+                    p.AimPunchAngle = fullUpdate.AimPunchAngle;
                     //p.AmmoLeft = fullUpdate.AmmoLeft;
                 }
             }

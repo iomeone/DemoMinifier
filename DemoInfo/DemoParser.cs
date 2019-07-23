@@ -873,6 +873,7 @@ namespace DemoInfo
 			p.Entity = playerEntity;
 			p.Position = new Vector();
 			p.Velocity = new Vector();
+            p.AimPunchAngle = new Vector();
 
 			//position update
 			playerEntity.FindProperty("cslocaldata.m_vecOrigin").VectorRecived += (sender, e) => {
@@ -921,6 +922,8 @@ namespace DemoInfo
             playerEntity.FindProperty("localdata.m_vecViewOffset[2]").FloatRecived += (sender, e) => p.ViewOffset.Z = e.Value;
 
             playerEntity.FindProperty("m_bIsScoped").IntRecived += (sender, e) => p.IsScoped = e.Value == 1;
+            playerEntity.FindProperty("cslocaldata.m_iShotsFired").IntRecived += (sender, e) => p.ShotsFired = e.Value;
+            playerEntity.FindProperty("localdata.m_Local.m_aimPunchAngle").VectorRecived += (sender, e) => p.AimPunchAngle = e.Value;
 
 
             playerEntity.FindProperty("m_unCurrentEquipmentValue").IntRecived += (sender, e) => p.CurrentEquipmentValue = e.Value;

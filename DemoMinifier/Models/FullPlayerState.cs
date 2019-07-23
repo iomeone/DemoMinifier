@@ -39,6 +39,10 @@ namespace DemoMinifier.Models
         public Dictionary<short, Weapon> Weapons { get; set; }
         [ProtoMember(23)]
         public bool IsScoped { get; set; }
+        [ProtoMember(24)]
+        public int ShotsFired { get; set; }
+        [ProtoMember(25)]
+        public Vector AimPunchAngle { get; set; }
 
         public FullPlayerState()
         {
@@ -95,6 +99,12 @@ namespace DemoMinifier.Models
                 return false;
 
             if (IsScoped != other.IsScoped)
+                return false;
+
+            if (ShotsFired != other.ShotsFired)
+                return false;
+
+            if (AimPunchAngle != other.AimPunchAngle)
                 return false;
 
 

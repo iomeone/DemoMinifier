@@ -23,6 +23,11 @@ namespace DemoMinifier.Models
 
         public bool IsScoped { get; set; }
 
+        public int ShotsFired { get; set; }
+
+        public Vector AimPunchAngle { get; set; }
+        //End Custom
+
         public int EntityID { get; set; }
 
         public int HP { get; set; }

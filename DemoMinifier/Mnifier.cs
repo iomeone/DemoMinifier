@@ -214,7 +214,9 @@ namespace DemoMinifier
                     HasHelmet = player.HasHelmet,
                     AmmoLeft = AmmoLeft,
                     Weapons = Weapons,
-                    IsScoped = player.IsScoped
+                    IsScoped = player.IsScoped,
+                    ShotsFired = player.ShotsFired,
+                    AimPunchAngle = new Models.Vector(player.AimPunchAngle.X, player.AimPunchAngle.Y, player.AimPunchAngle.Z),
                 };
 
                 PositionPlayerState positionPlayerState = new PositionPlayerState(fullPlayerState);
