@@ -666,6 +666,9 @@ namespace DemoMinifier
 
         private void HandleSayText2(object sender, SayText2EventArgs e)
         {
+            if (e.Sender == null)
+                return;
+
             SayText2Event newEvent = new SayText2Event()
             {
                 SenderSteamID = e.Sender.SteamID,
