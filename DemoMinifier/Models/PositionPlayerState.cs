@@ -44,13 +44,13 @@ namespace DemoMinifier.Models
 
             PositionPlayerState other = (PositionPlayerState)obj;
 
-            if (Position != other.Position)
+            if (!Position.Equals(other.Position))
                 return false;
 
             if (ViewOffsetZ != other.ViewOffsetZ)
                 return false;
 
-            if (Velocity != other.Velocity)
+            if (!Velocity.Equals(other.Velocity))
                 return false;
 
             if (ViewDirectionX != other.ViewDirectionX)

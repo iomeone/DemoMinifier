@@ -104,7 +104,7 @@ namespace DemoMinifier.Models
             if (ShotsFired != other.ShotsFired)
                 return false;
 
-            if (AimPunchAngle != other.AimPunchAngle)
+            if (!AimPunchAngle.Equals(other.AimPunchAngle))
                 return false;
 
 

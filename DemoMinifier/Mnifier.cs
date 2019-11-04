@@ -39,8 +39,22 @@ namespace DemoMinifier
 
             ParseHeader();
 
-            await Task.Run(() => Parser.ParseToEnd(token), token);
+            bool completed = await Task.Run(() =>
+            {
+                try
+                {
+                    Parser.ParseToEnd(token);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }, token);
             stream.Dispose();
+
+            if (!completed)
+                return null;
 
             return Demo;
         }
@@ -246,7 +260,7 @@ namespace DemoMinifier
                         CurrentTick.PlayerStates.Add(fullPlayerState);
                 }
             }
-            
+
             Demo.Ticks.Add(CurrentTick);
             CurrentTick = new Tick();
         }

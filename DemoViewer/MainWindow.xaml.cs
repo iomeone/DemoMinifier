@@ -33,7 +33,7 @@ namespace DemoViewer
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            MinifiedDemo demo = MinifiedDemo.LoadCompressed("red-canids-vs-pain-nuke.minidem");
+            MinifiedDemo demo = MinifiedDemo.LoadCompressed("g2-vs-fnatic-m3-overpass.minidem");
             MinifiedParser parser = new MinifiedParser(demo);
 
             radarMain.SetMap(parser.Map);
