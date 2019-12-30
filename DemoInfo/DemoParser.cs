@@ -208,12 +208,12 @@ namespace DemoInfo
         /// <summary>
 		/// Occurs when someone makes a footstep
 		/// </summary>
-		public event EventHandler<PlayerFootstepArgs> PlayerFootstep;
+		public event EventHandler<PlayerFootstepEventArgs> PlayerFootstep;
 
         /// <summary>
 		/// Occurs when someone jumps
 		/// </summary>
-		public event EventHandler<PlayerJumpArgs> PlayerJump;
+		public event EventHandler<PlayerJumpEventArgs> PlayerJump;
 
         /// <summary>
         /// Occurs when an entity is killed (glass, chickens (but not balloons on overpass for some reason))
@@ -1689,13 +1689,13 @@ namespace DemoInfo
                 BombAbortDefuse(this, args);
         }
 
-        internal void RaisePlayerFootstep(PlayerFootstepArgs args)
+        internal void RaisePlayerFootstep(PlayerFootstepEventArgs args)
         {
             if (PlayerFootstep != null)
                 PlayerFootstep(this, args);
         }
 
-        internal void RaisePlayerJump(PlayerJumpArgs args)
+        internal void RaisePlayerJump(PlayerJumpEventArgs args)
         {
             if (PlayerJump != null)
                 PlayerJump(this, args);

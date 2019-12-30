@@ -429,13 +429,13 @@ namespace DemoInfo.DP.Handler
                     break;
                 case "player_footstep":
                     data = MapData(eventDescriptor, rawEvent);
-                    var footstep = new PlayerFootstepArgs();
+                    var footstep = new PlayerFootstepEventArgs();
                     footstep.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
                     parser.RaisePlayerFootstep(footstep);
                     break;
                 case "player_jump":
                     data = MapData(eventDescriptor, rawEvent);
-                    var jump = new PlayerJumpArgs();
+                    var jump = new PlayerJumpEventArgs();
                     jump.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
                     parser.RaisePlayerJump(jump);
                     break;

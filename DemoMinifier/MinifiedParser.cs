@@ -217,6 +217,31 @@ namespace DemoMinifier
 		/// Occurs when the server display a player rank
 		/// </summary>
 		public event EventHandler<RankUpdateEvent> RankUpdate;
+
+        /// <summary>
+		/// Occurs when someone makes a footstep
+		/// </summary>
+		public event EventHandler<PlayerFootstepEvent> PlayerFootstep;
+
+        /// <summary>
+		/// Occurs when someone jumps
+		/// </summary>
+		public event EventHandler<PlayerJumpEvent> PlayerJump;
+
+        /// <summary>
+        /// Occurs when an entity is killed (glass, chickens (but not balloons on overpass for some reason))
+        /// </summary>
+        public event EventHandler<OtherDeathEvent> OtherDeath;
+
+        /// <summary>
+        /// Occurs when a new entity is created in the game world
+        /// </summary>
+        public event EventHandler<EntitySpawnedEvent> EntitySpawned;
+
+        /// <summary>
+        /// Occurs when a new entity is destroyed/removed from the game world
+        /// </summary>
+        public event EventHandler<EntityRemovedEvent> EntityRemoved;
         #endregion
 
         public string Map
@@ -453,6 +478,21 @@ namespace DemoMinifier
                         break;
                     case EventType.SayText2:
                         SayText2?.Invoke(this, (SayText2Event)baseEvent);
+                        break;
+                    case EventType.PlayerJump:
+                        PlayerJump?.Invoke(this, (PlayerJumpEvent)baseEvent);
+                        break;
+                    case EventType.PlayerFootstep:
+                        PlayerFootstep?.Invoke(this, (PlayerFootstepEvent)baseEvent);
+                        break;
+                    case EventType.OtherDeath:
+                        OtherDeath?.Invoke(this, (OtherDeathEvent)baseEvent);
+                        break;
+                    case EventType.EntitySpawned:
+                        EntitySpawned?.Invoke(this, (EntitySpawnedEvent)baseEvent);
+                        break;
+                    case EventType.EntityRemoved:
+                        EntityRemoved?.Invoke(this, (EntityRemovedEvent)baseEvent);
                         break;
                     default:
                         break;

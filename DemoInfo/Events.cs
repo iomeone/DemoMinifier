@@ -208,12 +208,12 @@ namespace DemoInfo
 		public bool HasKit { get; set; }
 	}
 
-    public class PlayerFootstepArgs : EventArgs
+    public class PlayerFootstepEventArgs : EventArgs
     {
         public Player Player { get; set; }
     }
 
-    public class PlayerJumpArgs : EventArgs
+    public class PlayerJumpEventArgs : EventArgs
     {
         public Player Player { get; set; }
     }

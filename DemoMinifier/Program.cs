@@ -16,7 +16,7 @@ namespace DemoMinifier
 
             //demo.SaveCompressed("g2-vs-fnatic-m3-overpass.minidem");
 
-            MinifiedDemo demo = await minifier.MinifyDemoAsync("vitality-vs-mousesports-m2-mirage.dem", new System.Threading.CancellationToken());
+            MinifiedDemo demo = await minifier.MinifyDemoAsync("vitality-vs-mousesports-m1-inferno.dem", new System.Threading.CancellationToken());
 
             int baseCount = 0;
             int positionCount = 0;
@@ -38,7 +38,7 @@ namespace DemoMinifier
                 entityFullCount += tick.EntityStates.Count((s) => s.Type == EntityStateType.Full);
             }
 
-            demo.SaveCompressed("vitality-vs-mousesports-m2-mirage.minidem");
+            demo.SaveCompressed("vitality-vs-mousesports-m1-inferno.minidem");
 
             //MinifiedDemo demo = await minifier.MinifyDemoAsync("test2.dem", new System.Threading.CancellationToken());
 

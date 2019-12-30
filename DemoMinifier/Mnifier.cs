@@ -745,7 +745,7 @@ namespace DemoMinifier
             throw new NotImplementedException();
         }
 
-        private void HandlePlayerJump(object sender, PlayerJumpArgs e)
+        private void HandlePlayerJump(object sender, PlayerJumpEventArgs e)
         {
             if (e.Player == null)
                 return;
@@ -758,7 +758,7 @@ namespace DemoMinifier
             CurrentTick.Events.Add(newEvent);
         }
 
-        private void HandlePlayerFootstep(object sender, PlayerFootstepArgs e)
+        private void HandlePlayerFootstep(object sender, PlayerFootstepEventArgs e)
         {
             if (e.Player == null)
                 return;
