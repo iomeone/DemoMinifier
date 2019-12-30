@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace DemoMinifier
 {
@@ -226,6 +227,19 @@ namespace DemoMinifier
         public MinifiedParser(MinifiedDemo demo)
         {
             Demo = demo;
+
+            currentTick = Demo.Ticks[CurrentTickIndex];
+        }
+
+        public void ParseToRoundEnd()
+        {
+            while (!currentTick.Events.Any(baseEvent => baseEvent.Type == EventType.RoundEnd) && CurrentTickIndex < Demo.Ticks.Count)
+                ParseNextTick();
+        }
+
+        public void SetCurrentTick(int newTickIndex)
+        {
+            CurrentTickIndex = newTickIndex;
         }
 
         public void ParseToEnd()
@@ -234,19 +248,21 @@ namespace DemoMinifier
                 ParseNextTick();
         }
 
-        int currentTickIndex = 0;
+        public int CurrentTickIndex = 0;
 
         Tick currentTick;
         Dictionary<long, Player> currentPlayers = new Dictionary<long, Player>();
+
+        public IEnumerable<BaseEvent> CurrentEvents { get { return currentTick.Events; } }
 
         public IEnumerable<Player> PartipatingPlayers { get { return currentPlayers.Values.Where(p => p.Team != Team.Spectate); } }
 
         public void ParseNextTick()
         {
-            if (currentTickIndex >= Demo.Ticks.Count)
+            if (CurrentTickIndex >= Demo.Ticks.Count)
                 return;
 
-            currentTick = Demo.Ticks[currentTickIndex];
+            currentTick = Demo.Ticks[CurrentTickIndex];
 
             HandlePlayerStateUpdates();
 
@@ -254,17 +270,16 @@ namespace DemoMinifier
 
             TickDone?.Invoke(this, null);
 
-            currentTickIndex++;
+            CurrentTickIndex++;
         }
 
         private void HandlePlayerStateUpdates()
         {
             foreach (BasePlayerState stateUpdate in currentTick.PlayerStates)
             {
-                StateType updateType = stateUpdate.Type;
+                PlayerStateType updateType = stateUpdate.Type;
 
                 long steamId = Demo.SteamIDMappings[stateUpdate.SteamIDIndex];
-                string name = Demo.NameMappings[stateUpdate.NameIndex];
 
                 Player p;
 
@@ -276,13 +291,12 @@ namespace DemoMinifier
                     p = new Player()
                     {
                         SteamID = steamId,
-                        Name = name
                     };
                     currentPlayers.Add(steamId, p);
                 }
 
                 //Update position
-                if (updateType == StateType.Position || updateType == StateType.Full)
+                if (updateType == PlayerStateType.Position || updateType == PlayerStateType.Full)
                 {
                     PositionPlayerState positionUpdate = (PositionPlayerState)stateUpdate;
 
@@ -294,10 +308,11 @@ namespace DemoMinifier
                 }
 
                 //Update full
-                if (updateType == StateType.Full)
+                if (updateType == PlayerStateType.Full)
                 {
                     FullPlayerState fullUpdate = (FullPlayerState)stateUpdate;
 
+                    p.Name = Demo.NameMappings[fullUpdate.NameIndex];
                     p.HP = fullUpdate.HP;
                     p.Armor = fullUpdate.Armor;
                     p.FlashDuration = fullUpdate.FlashDuration;

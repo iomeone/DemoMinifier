@@ -43,7 +43,12 @@ namespace DemoMinifier.Models.Events
         PlayerDisconnect,
         SayText,
         SayText2,
-        RankUpdate
+        RankUpdate,
+        PlayerJump,
+        PlayerFootstep,
+        OtherDeath,
+        EntitySpawned,
+        EntityRemoved
     }
 
     [ProtoContract]
@@ -64,6 +69,11 @@ namespace DemoMinifier.Models.Events
     [ProtoInclude(24, typeof(SayText2Event))]
     [ProtoInclude(25, typeof(WeaponFiredEvent))]
     [ProtoInclude(26, typeof(RankUpdateEvent))]
+    [ProtoInclude(27, typeof(PlayerJumpEvent))]
+    [ProtoInclude(28, typeof(PlayerFootstepEvent))]
+    [ProtoInclude(29, typeof(OtherDeathEvent))]
+    [ProtoInclude(30, typeof(EntitySpawnedEvent))]
+    [ProtoInclude(31, typeof(EntityRemovedEvent))]
     public class BaseEvent
     {
         [ProtoMember(1)]
@@ -597,6 +607,90 @@ namespace DemoMinifier.Models.Events
         public WeaponFiredEvent()
         {
             Type = EventType.WeaponFired;
+        }
+    }
+
+    [ProtoContract]
+    public class PlayerJumpEvent : BaseEvent
+    {
+        [ProtoMember(1)]
+        public long JumperSteamID{ get; set; }
+
+        public PlayerJumpEvent()
+        {
+            Type = EventType.PlayerJump;
+        }
+    }
+
+    [ProtoContract]
+    public class PlayerFootstepEvent : BaseEvent
+    {
+        [ProtoMember(1)]
+        public long PlayerSteamID { get; set; }
+
+        public PlayerFootstepEvent()
+        {
+            Type = EventType.PlayerJump;
+        }
+    }
+
+    [ProtoContract]
+    public class OtherDeathEvent : BaseEvent
+    {
+        [ProtoMember(1)]
+        public Weapon Weapon { get; internal set; }
+
+        [ProtoMember(2)]
+        public int EntityID { get; internal set; }
+
+        [ProtoMember(3)]
+        public Entity Entity { get; internal set; }
+
+        [ProtoMember(4)]
+        public string EntityType { get; internal set; }
+
+        [ProtoMember(5)]
+        public long KillerSteamID { get; internal set; }
+
+        [ProtoMember(6)]
+        public int PenetratedObjects { get; internal set; }
+
+        [ProtoMember(7)]
+        public bool Headshot { get; internal set; }
+
+        public OtherDeathEvent()
+        {
+            Type = EventType.OtherDeath;
+        }
+    }
+
+    [ProtoContract]
+    public class EntitySpawnedEvent : BaseEvent
+    {
+        [ProtoMember(1)]
+        public int EntityID { get; internal set; }
+
+        [ProtoMember(2)]
+        public Entity Entity { get; internal set; }
+
+        public EntitySpawnedEvent()
+        {
+            Type = EventType.EntitySpawned;
+        }
+    }
+
+    [ProtoContract]
+    public class EntityRemovedEvent : BaseEvent
+    {
+        [ProtoMember(1)]
+        public int EntityID { get; internal set; }
+
+        [ProtoMember(2)]
+        public Entity Entity { get; internal set; }
+
+        public EntityRemovedEvent()
+        {
+            Type = EventType.EntityRemoved;
         }
     }
 }

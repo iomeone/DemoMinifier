@@ -12,12 +12,20 @@ namespace DemoMinifier.Models
     {
         [ProtoMember(1)]
         public List<BasePlayerState> PlayerStates { get; set; }
+
         [ProtoMember(2)]
+        public List<BaseEntityState> EntityStates { get; set; }
+
+        [ProtoMember(3)]
         public List<BaseEvent> Events { get; set; }
+
+        [ProtoMember(4)]
+        public int IngameTick { get; set; }
 
         public Tick()
         {
             PlayerStates = new List<BasePlayerState>();
+            EntityStates = new List<BaseEntityState>();
             Events = new List<BaseEvent>();
         }
 

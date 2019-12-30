@@ -109,7 +109,23 @@ namespace DemoInfo
 	    public bool AssistedFlash { get; internal set; }
     }
 
-	public class BotTakeOverEventArgs : EventArgs
+    public class OtherDeathEventArgs : EventArgs
+    {
+        public Equipment Weapon { get; internal set; }
+
+        public Entity Entity { get; internal set; }
+
+        public string EntityType { get; internal set; }
+
+        public Player Killer { get; internal set; }
+
+        public int PenetratedObjects { get; internal set; }
+
+        public bool Headshot { get; internal set; }
+    }
+
+
+    public class BotTakeOverEventArgs : EventArgs
 	{
 		public Player Taker { get; internal set; }
 	}
@@ -192,7 +208,17 @@ namespace DemoInfo
 		public bool HasKit { get; set; }
 	}
 
-	public class PlayerHurtEventArgs : EventArgs
+    public class PlayerFootstepArgs : EventArgs
+    {
+        public Player Player { get; set; }
+    }
+
+    public class PlayerJumpArgs : EventArgs
+    {
+        public Player Player { get; set; }
+    }
+
+    public class PlayerHurtEventArgs : EventArgs
 	{
 		/// <summary>
 		/// The hurt player
@@ -355,7 +381,21 @@ namespace DemoInfo
 		public float RankChange { get; set; }
 	}
 
-	public class Equipment
+    public class EntitySpawnedEventArgs : EventArgs
+    {
+        public int ID { get; set; }
+
+        public Entity Entity { get; set; }
+    }
+
+    public class EntityRemovedEventArgs : EventArgs
+    {
+        public int ID { get; set; }
+
+        public Entity Entity { get; set; }
+    }
+
+    public class Equipment
 	{
 		internal int EntityID { get; set; }
 

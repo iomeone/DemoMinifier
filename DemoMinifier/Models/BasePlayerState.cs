@@ -10,15 +10,13 @@ namespace DemoMinifier.Models
     public class BasePlayerState
     {
         [ProtoMember(1)]
-        public StateType Type { get; set; }
+        public PlayerStateType Type { get; set; }
         [ProtoMember(2)]
-        public byte NameIndex { get; set; }
-        [ProtoMember(3)]
         public byte SteamIDIndex { get; set; }
 
         public BasePlayerState()
         {
-            Type = StateType.Base;
+            Type = PlayerStateType.Base;
         }
 
         public override bool Equals(object obj)
@@ -31,9 +29,6 @@ namespace DemoMinifier.Models
             if (Type != other.Type)
                 return false;
 
-            if (NameIndex != other.NameIndex)
-                return false;
-
             if (SteamIDIndex != other.SteamIDIndex)
                 return false;
 
@@ -41,10 +36,10 @@ namespace DemoMinifier.Models
         }
     }
 
-    public enum StateType : byte
+    public enum PlayerStateType : byte
     {
-        Base,
-        Position,
-        Full
+        Base = 0,
+        Position = 1,
+        Full = 2
     }
 }

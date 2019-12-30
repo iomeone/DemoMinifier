@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DemoInfo.DP
 {
-	internal class Entity
+	internal class EntityInfo
 	{
 		public int ID { get; set; }
 
@@ -17,7 +17,7 @@ namespace DemoInfo.DP
 
 		public PropertyEntry[] Props { get; private set; }
 
-		public Entity(int id, ServerClass serverClass)
+		public EntityInfo(int id, ServerClass serverClass)
 		{
 			this.ID = id;
 			this.ServerClass = serverClass;
@@ -149,7 +149,7 @@ namespace DemoInfo.DP
 		#pragma warning restore 0067
 
 		[Conditional("DEBUG")]
-		private void FireDataReceived_DebugEvent(object val, Entity e)
+		private void FireDataReceived_DebugEvent(object val, EntityInfo e)
 		{
 			#if DEBUG
 			#pragma warning disable 0618
@@ -170,7 +170,7 @@ namespace DemoInfo.DP
 			#endif
 		}
 
-		public void Decode(IBitStream stream, Entity e)
+		public void Decode(IBitStream stream, EntityInfo e)
 		{
 			//I found no better place for this, sorry.
 			//This checks, when in Debug-Mode
@@ -291,7 +291,7 @@ namespace DemoInfo.DP
 		}
 
 		[Conditional("DEBUG")]
-		public void CheckBindings(Entity e)
+		public void CheckBindings(EntityInfo e)
 		{
 			if (IntRecived != null && this.Entry.Prop.Type != SendPropertyType.Int)
 				throw new InvalidOperationException(
@@ -338,7 +338,7 @@ namespace DemoInfo.DP
 
 		}
 
-		public static void Emit(Entity entity, object[] captured)
+		public static void Emit(EntityInfo entity, object[] captured)
 		{
 			foreach (var arg in captured) {
 				var intReceived = arg as RecordedPropertyUpdate<int>;
@@ -383,11 +383,11 @@ namespace DemoInfo.DP
 	{
 		public T Value { get; private set; }
 
-		public Entity Entity { get; private set; }
+		public EntityInfo Entity { get; private set; }
 
 		public PropertyEntry Property { get; private set; }
 
-		public PropertyUpdateEventArgs(T value, Entity e, PropertyEntry p)
+		public PropertyUpdateEventArgs(T value, EntityInfo e, PropertyEntry p)
 		{
 			this.Value = value;
 			this.Entity = e;

@@ -51,7 +51,7 @@ namespace DemoInfo
 
 		public bool IsDucking { get; set; }
 
-		internal Entity Entity;
+		internal EntityInfo Entity;
 
 		public bool Disconnected { get; set; }
 

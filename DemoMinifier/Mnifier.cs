@@ -23,6 +23,7 @@ namespace DemoMinifier
         byte CurrentNameIndex = 0;
 
         Dictionary<byte, FullPlayerState> MostRecentPlayerStates;
+        Dictionary<int, FullEntityState> MostRecentEntityStates;
 
         public async Task<MinifiedDemo> MinifyDemoAsync(string path, CancellationToken token, Action<string, float> progressCallback = null)
         {
@@ -32,6 +33,7 @@ namespace DemoMinifier
             CurrentTick = new Tick();
 
             MostRecentPlayerStates = new Dictionary<byte, FullPlayerState>();
+            MostRecentEntityStates = new Dictionary<int, FullEntityState>();
 
             ProgressCallback = progressCallback;
 
@@ -65,6 +67,7 @@ namespace DemoMinifier
             Demo = null;
             CurrentTick = null;
             MostRecentPlayerStates = null;
+            MostRecentEntityStates = null;
             ProgressCallback = null;
         }
 
@@ -119,12 +122,19 @@ namespace DemoMinifier
             Parser.SayText += HandleSayText;
             Parser.SayText2 += HandleSayText2;
             Parser.RankUpdate += HandleRankUpdate;
+            Parser.PlayerJump += HandlePlayerJump;
+            Parser.PlayerFootstep += HandlePlayerFootstep;
+            Parser.OtherDeath += HandleOtherDeath;
+            Parser.EntitySpawned += HandleEntitySpawned;
+            Parser.EntityRemoved += HandleEntityRemoved;
 
             Parser.TickDone += HandleTickDone;
         }
 
         private void HandleTickDone(object sender, TickDoneEventArgs e)
         {
+            CurrentTick.IngameTick = Parser.IngameTick;
+
             //Store the names and steam IDs for every steam account in the server, including casters, bots and referees
             foreach (var participant in Parser.Participants)
             {
@@ -206,7 +216,7 @@ namespace DemoMinifier
 
                 FullPlayerState fullPlayerState = new FullPlayerState()
                 {
-                    Type = StateType.Full,
+                    Type = PlayerStateType.Full,
                     NameIndex = NameIndex,
                     SteamIDIndex = SteamIDIndex,
                     Position = new Models.Vector(player.Position.X, player.Position.Y, player.Position.Z),
@@ -248,7 +258,7 @@ namespace DemoMinifier
 
                 if (fullStateEqual && positionStateEqual)
                 {
-                    CurrentTick.PlayerStates.Add(new BasePlayerState() { Type = StateType.Base, SteamIDIndex = SteamIDIndex, NameIndex = NameIndex });
+                    CurrentTick.PlayerStates.Add(new BasePlayerState() { Type = PlayerStateType.Base, SteamIDIndex = SteamIDIndex });
                 }
                 else
                 {
@@ -258,6 +268,42 @@ namespace DemoMinifier
                         CurrentTick.PlayerStates.Add(positionPlayerState);
                     else
                         CurrentTick.PlayerStates.Add(fullPlayerState);
+                }
+            }
+
+            foreach (var entity in Parser.Entities)
+            {
+                FullEntityState fullEntityState = new FullEntityState()
+                {
+                    Type = EntityStateType.Full,
+                    ID = (short)entity.ID,
+                    EntityType = (Models.EntityType)((int)entity.Type),
+                    Position = new Models.Vector(entity.Position.X, entity.Position.Y, entity.Position.Z),
+                    Rotation = new Models.Vector(entity.Rotation.X, entity.Rotation.Y, entity.Rotation.Z),
+                    ModelIndex = entity.ModelIndex,
+                    ModelLocation = entity.ModelLocation
+                };
+
+                if (MostRecentEntityStates.ContainsKey(entity.ID))
+                {
+                    FullEntityState mostRecentFullState = MostRecentEntityStates[entity.ID];
+
+                    bool fullStateEqual = fullEntityState.Equals(mostRecentFullState);
+
+                    if (fullStateEqual && !CurrentTick.Events.Any((evnt) => evnt.Type == EventType.RoundStart))
+                    {
+                        CurrentTick.EntityStates.Add(new BaseEntityState(fullEntityState));
+                    }
+                    else
+                    {
+                        CurrentTick.EntityStates.Add(fullEntityState);
+                        MostRecentEntityStates[entity.ID] = fullEntityState;
+                    }
+                }
+                else
+                {
+                    MostRecentEntityStates[entity.ID] = fullEntityState;
+                    CurrentTick.EntityStates.Add(fullEntityState);
                 }
             }
 
@@ -697,6 +743,108 @@ namespace DemoMinifier
         private void HandleRankUpdate(object sender, RankUpdateEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void HandlePlayerJump(object sender, PlayerJumpArgs e)
+        {
+            if (e.Player == null)
+                return;
+
+            PlayerJumpEvent newEvent = new PlayerJumpEvent()
+            {
+                JumperSteamID = e.Player.SteamID
+            };
+
+            CurrentTick.Events.Add(newEvent);
+        }
+
+        private void HandlePlayerFootstep(object sender, PlayerFootstepArgs e)
+        {
+            if (e.Player == null)
+                return;
+
+            PlayerFootstepEvent newEvent = new PlayerFootstepEvent()
+            {
+                PlayerSteamID = e.Player.SteamID
+            };
+
+            CurrentTick.Events.Add(newEvent);
+        }
+
+        private void HandleOtherDeath(object sender, OtherDeathEventArgs e)
+        {
+            Weapon weapon = new Weapon()
+            {
+                Equipment = (Models.EquipmentElement)((int)e.Weapon.Weapon),
+                OriginalString = e.Weapon.OriginalString,
+                AmmoInMagazine = (short)e.Weapon.AmmoInMagazine,
+                AmmoType = (short)e.Weapon.AmmoType,
+            };
+
+            Models.Entity entity = new Models.Entity()
+            {
+                ID = e.Entity.ID,
+                Type = (Models.EntityType)((int)e.Entity.Type),
+                ModelIndex = e.Entity.ModelIndex,
+                ModelLocation = e.Entity.ModelLocation,
+                Position = new Models.Vector(e.Entity.Position.X, e.Entity.Position.Y, e.Entity.Position.Z),
+                Rotation = new Models.Vector(e.Entity.Rotation.X, e.Entity.Rotation.Y, e.Entity.Rotation.Z),
+            };
+
+            OtherDeathEvent newEvent = new OtherDeathEvent()
+            {
+                Entity = entity,
+                EntityID = e.Entity.ID,
+                EntityType = e.EntityType,
+                Weapon = weapon,
+                Headshot = e.Headshot,
+                KillerSteamID = e.Killer.SteamID,
+                PenetratedObjects = e.PenetratedObjects
+            };
+
+            CurrentTick.Events.Add(newEvent);
+        }
+
+        private void HandleEntitySpawned(object sender, EntitySpawnedEventArgs e)
+        {
+            Models.Entity entity = new Models.Entity()
+            {
+                ID = e.Entity.ID,
+                Type = (Models.EntityType)((int)e.Entity.Type),
+                ModelIndex = e.Entity.ModelIndex,
+                ModelLocation = e.Entity.ModelLocation,
+                Position = new Models.Vector(e.Entity.Position.X, e.Entity.Position.Y, e.Entity.Position.Z),
+                Rotation = new Models.Vector(e.Entity.Rotation.X, e.Entity.Rotation.Y, e.Entity.Rotation.Z),
+            };
+
+            EntitySpawnedEvent newEvent = new EntitySpawnedEvent()
+            {
+                Entity = entity,
+                EntityID = e.Entity.ID,
+            };
+
+            CurrentTick.Events.Add(newEvent);
+        }
+
+        private void HandleEntityRemoved(object sender, EntityRemovedEventArgs e)
+        {
+            Models.Entity entity = new Models.Entity()
+            {
+                ID = e.Entity.ID,
+                Type = (Models.EntityType)((int)e.Entity.Type),
+                ModelIndex = e.Entity.ModelIndex,
+                ModelLocation = e.Entity.ModelLocation,
+                Position = new Models.Vector(e.Entity.Position.X, e.Entity.Position.Y, e.Entity.Position.Z),
+                Rotation = new Models.Vector(e.Entity.Rotation.X, e.Entity.Rotation.Y, e.Entity.Rotation.Z),
+            };
+
+            EntityRemovedEvent newEvent = new EntityRemovedEvent()
+            {
+                Entity = entity,
+                EntityID = e.Entity.ID,
+            };
+
+            CurrentTick.Events.Add(newEvent);
         }
     }
 }

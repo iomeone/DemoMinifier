@@ -21,7 +21,7 @@ namespace DemoInfo.DT
 
 		public event EventHandler<EntityCreatedEventArgs> OnNewEntity; 
 
-		internal void AnnounceNewEntity(Entity e)
+		internal void AnnounceNewEntity(EntityInfo e)
 		{
 			if(OnNewEntity != null)
 				OnNewEntity(this, new EntityCreatedEventArgs(this, e));
@@ -29,7 +29,7 @@ namespace DemoInfo.DT
 
 		public event EventHandler<EntityDestroyedEventArgs> OnDestroyEntity;
 
-		internal void AnnounceDestroyedEntity(Entity e)
+		internal void AnnounceDestroyedEntity(EntityInfo e)
 		{
 			if (OnDestroyEntity != null)
 				OnDestroyEntity(this, new EntityDestroyedEventArgs(this, e));
@@ -86,9 +86,9 @@ namespace DemoInfo.DT
 	class EntityCreatedEventArgs : EventArgs
 	{
 		public ServerClass Class { get; private set; }
-		public Entity Entity { get; private set; }
+		public EntityInfo Entity { get; private set; }
 
-		public EntityCreatedEventArgs(ServerClass c, Entity e)
+		public EntityCreatedEventArgs(ServerClass c, EntityInfo e)
 		{
 			this.Class = c;
 			this.Entity = e;
@@ -97,7 +97,7 @@ namespace DemoInfo.DT
 
 	class EntityDestroyedEventArgs : EntityCreatedEventArgs
 	{
-		public EntityDestroyedEventArgs(ServerClass c, Entity e) : base(c, e)
+		public EntityDestroyedEventArgs(ServerClass c, EntityInfo e) : base(c, e)
 		{
 
 		}

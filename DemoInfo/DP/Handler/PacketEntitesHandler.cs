@@ -34,21 +34,21 @@ namespace DemoInfo.DP.Handler
 						//create it
 						var e = ReadEnterPVS(reader, currentEntity, parser);
 
-						parser.Entities[currentEntity] = e;
+						parser.RawEntities[currentEntity] = e;
 
 						e.ApplyUpdate(reader);
 					} else {
 						// preserve / update
-						Entity e = parser.Entities[currentEntity];
+						EntityInfo e = parser.RawEntities[currentEntity];
 						e.ApplyUpdate(reader);
 					}
 				} else {
-					Entity e = parser.Entities[currentEntity];
+					EntityInfo e = parser.RawEntities[currentEntity];
 					e.ServerClass.AnnounceDestroyedEntity(e);
 
 					// leave / destroy
 					e.Leave ();
-					parser.Entities[currentEntity] = null;
+					parser.RawEntities[currentEntity] = null;
 
 					//dunno, but you gotta read this.
 					if (reader.ReadBit()) {
@@ -61,7 +61,7 @@ namespace DemoInfo.DP.Handler
 		/// Reads an update that occures when a new edict enters the PVS (potentially visible system)
 		/// </summary>
 		/// <returns>The new Entity.</returns>
-        private static Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
+        private static EntityInfo ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
         {
 			//What kind of entity?
             int serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
@@ -73,7 +73,7 @@ namespace DemoInfo.DP.Handler
 			//Never used anywhere I guess. Every parser just skips this
 
 
-			Entity newEntity = new Entity(id, entityClass);
+			EntityInfo newEntity = new EntityInfo(id, entityClass);
 
 			//give people the chance to subscribe to events for this
 			newEntity.ServerClass.AnnounceNewEntity(newEntity);
@@ -102,10 +102,10 @@ namespace DemoInfo.DP.Handler
 
 		private class PropertyCollector : IDisposable
 		{
-			private readonly Entity Underlying;
+			private readonly EntityInfo Underlying;
 			private readonly IList<object> Capture;
 
-			public PropertyCollector(Entity underlying, IList<object> capture)
+			public PropertyCollector(EntityInfo underlying, IList<object> capture)
 			{
 				Underlying = underlying;
 				Capture = capture;

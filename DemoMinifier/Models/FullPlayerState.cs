@@ -9,6 +9,8 @@ namespace DemoMinifier.Models
     [ProtoContract]
     public class FullPlayerState : PositionPlayerState
     {
+        [ProtoMember(8)]
+        public byte NameIndex { get; set; }
         [ProtoMember(9)]
         public byte HP { get; set; }
         [ProtoMember(10)]
@@ -46,7 +48,7 @@ namespace DemoMinifier.Models
 
         public FullPlayerState()
         {
-            Type = StateType.Full;
+            Type = PlayerStateType.Full;
             AmmoLeft = new Dictionary<byte, byte>();
             Weapons = new Dictionary<short, Weapon>();
         }
@@ -58,6 +60,9 @@ namespace DemoMinifier.Models
                 return false;
 
             FullPlayerState other = (FullPlayerState)obj;
+
+            if (NameIndex != other.NameIndex)
+                return false;
 
             if (HP != other.HP)
                 return false;

@@ -9,26 +9,25 @@ namespace DemoMinifier.Models
     [ProtoInclude(31, typeof(FullPlayerState))]
     public class PositionPlayerState : BasePlayerState
     {
-        [ProtoMember(4)]
+        [ProtoMember(3)]
         public Vector Position { get; set; }
-        [ProtoMember(5)]
+        [ProtoMember(4)]
         public float ViewOffsetZ { get; set; }
-        [ProtoMember(6)]
+        [ProtoMember(5)]
         public Vector Velocity { get; set; }
-        [ProtoMember(7)]
+        [ProtoMember(6)]
         public float ViewDirectionX { get; set; }
-        [ProtoMember(8)]
+        [ProtoMember(7)]
         public float ViewDirectionY { get; set; }
 
         public PositionPlayerState()
         {
-            Type = StateType.Position;
+            Type = PlayerStateType.Position;
         }
 
         public PositionPlayerState(FullPlayerState fullState)
         {
-            Type = StateType.Position;
-            NameIndex = fullState.NameIndex;
+            Type = PlayerStateType.Position;
             SteamIDIndex = fullState.SteamIDIndex;
             Position = fullState.Position;
             ViewOffsetZ = fullState.ViewOffsetZ;
