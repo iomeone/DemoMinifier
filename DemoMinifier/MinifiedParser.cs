@@ -282,6 +282,8 @@ namespace DemoMinifier
 
         public IEnumerable<Player> PartipatingPlayers { get { return currentPlayers.Values.Where(p => p.Team != Team.Spectate); } }
 
+        public int IngameTick { get { return currentTick.IngameTick; } }
+
         public void ParseNextTick()
         {
             if (CurrentTickIndex >= Demo.Ticks.Count)

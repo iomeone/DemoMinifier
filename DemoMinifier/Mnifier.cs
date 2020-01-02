@@ -131,9 +131,40 @@ namespace DemoMinifier
             Parser.TickDone += HandleTickDone;
         }
 
+        private int lastCtScore = -1;
+        private int lastTScore = -1;
+        private string lastCtName = "";
+        private string lastTName = "";
+        private string lastCtFlag = "";
+        private string lastTFlag = "";
+
         private void HandleTickDone(object sender, TickDoneEventArgs e)
         {
             CurrentTick.IngameTick = Parser.IngameTick;
+
+            if (Parser.CTScore != lastCtScore || Parser.TScore != lastTScore ||
+                Parser.CTClanName != lastCtName || Parser.TClanName != lastTName ||
+                Parser.CTFlag != lastCtFlag || Parser.TFlag != lastTFlag)
+            {
+                TeanInfoUpdateEvent infoUpdate = new TeanInfoUpdateEvent()
+                {
+                    CTScore = Parser.CTScore,
+                    TScore = Parser.TScore,
+                    CTName = Parser.CTClanName,
+                    TName = Parser.TClanName,
+                    CTFlag = Parser.CTFlag,
+                    TFlag = Parser.TFlag
+                };
+
+                lastCtScore = Parser.CTScore;
+                lastTScore = Parser.TScore;
+                lastCtName = Parser.CTClanName;
+                lastTName = Parser.TClanName;
+                lastCtFlag = Parser.CTFlag;
+                lastTFlag = Parser.TFlag;
+
+                CurrentTick.Events.Add(infoUpdate);
+            }
 
             //Store the names and steam IDs for every steam account in the server, including casters, bots and referees
             foreach (var participant in Parser.Participants)

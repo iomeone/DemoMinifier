@@ -48,7 +48,8 @@ namespace DemoMinifier.Models.Events
         PlayerFootstep,
         OtherDeath,
         EntitySpawned,
-        EntityRemoved
+        EntityRemoved,
+        TeamInfoUpdate
     }
 
     [ProtoContract]
@@ -630,7 +631,7 @@ namespace DemoMinifier.Models.Events
 
         public PlayerFootstepEvent()
         {
-            Type = EventType.PlayerJump;
+            Type = EventType.PlayerFootstep;
         }
     }
 
@@ -691,6 +692,33 @@ namespace DemoMinifier.Models.Events
         public EntityRemovedEvent()
         {
             Type = EventType.EntityRemoved;
+        }
+    }
+
+    [ProtoContract]
+    public class TeanInfoUpdateEvent : BaseEvent
+    {
+        [ProtoMember(1)]
+        public int CTScore { get; internal set; }
+
+        [ProtoMember(2)]
+        public int TScore { get; internal set; }
+
+        [ProtoMember(3)]
+        public string CTName { get; internal set; }
+
+        [ProtoMember(4)]
+        public string TName { get; internal set; }
+
+        [ProtoMember(3)]
+        public string CTFlag { get; internal set; }
+
+        [ProtoMember(4)]
+        public string TFlag { get; internal set; }
+
+        public TeanInfoUpdateEvent()
+        {
+            Type = EventType.TeamInfoUpdate;
         }
     }
 }

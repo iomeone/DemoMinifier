@@ -138,7 +138,7 @@ namespace DemoInfo.DP.Handler
                 death.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
 
                 parser.RaiseOtherDeath(death);
-                Console.WriteLine(parser.CurrentTick + " " + data["othertype"] + " | " + parser.EntityDict[(int)data["otherid"]].ModelLocation + " | " + data["weapon"] + " | " + parser.EntityDict[(int)data["otherid"]].Position.X + " " + parser.EntityDict[(int)data["otherid"]].Position.Y + " " + parser.EntityDict[(int)data["otherid"]].Position.Z);
+                //Console.WriteLine(parser.CurrentTick + " " + data["othertype"] + " | " + parser.EntityDict[(int)data["otherid"]].ModelLocation + " | " + data["weapon"] + " | " + parser.EntityDict[(int)data["otherid"]].Position.X + " " + parser.EntityDict[(int)data["otherid"]].Position.Y + " " + parser.EntityDict[(int)data["otherid"]].Position.Z);
             }
             
             //Console.WriteLine(eventDescriptor.Name);
